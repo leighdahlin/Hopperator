@@ -20,7 +20,7 @@ usrinputBtn.addEventListener("click",function(){
 
 })
 
-//MATTS NEW CODE
+//Leigh's code
 
 // fetch("https://brianiswu-open-brewery-db-v1.p.rapidapi.com/breweries/search?query=dog", {
 //     "method": "GET",
@@ -35,3 +35,7 @@ usrinputBtn.addEventListener("click",function(){
 // .catch(err => {
 //     console.error(err);
 // });
+
+//more code
+//bulldog
+//even more code

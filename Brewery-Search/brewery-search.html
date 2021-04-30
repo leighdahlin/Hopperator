@@ -3,68 +3,46 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>The Hopperator!</title>
+    <title>The Hopperator: Search Breweries</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="brewery-search.css">
   </head>
   <body>
-    <p>Branching</p>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav id="nav" class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-          <a class="navbar-item" href="https://bulma.io">
-            <img src="https://brew.sh/assets/img/homebrew-256x256.png" width="112" height="28">
-          </a>
-          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
+          <a class="navbar-item" href="../Homepage/home.html">
+            <img id="hop-brand" src="../Images/hop-3.png">
+            <h2>The Hopperator</h2>
           </a>
         </div>
         <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start">
-            <a class="navbar-item">
+            <a class="navbar-item" href="../Homepage/home.html">
               Home
-            </a>
-            <a class="navbar-item">
-              Documentation
             </a>
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link">
-                More
+                Search Breweries
               </a>
               <div class="navbar-dropdown">
-                <a class="navbar-item">
-                  About
+                <a class="navbar-item" href="brewery-search.html">
+                  New Search
                 </a>
-                <a class="navbar-item">
-                  Jobs
-                </a>
-                <a class="navbar-item">
-                  Contact
-                </a>
-                <hr class="navbar-divider">
-                <a class="navbar-item">
-                  Report an issue
+                <a class="navbar-item" href="../Favorites/favorites.html">
+                  Favorites
                 </a>
               </div>
             </div>
-          </div>
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="buttons">
-                <a class="button is-primary">
-                  <strong>Sign up</strong>
-                </a>
-                <a class="button is-light">
-                  Log in
-                </a>
-              </div>
-            </div>
+            <a class="navbar-item" href="../Beer-Crawl-Map/beer-map.html">
+              Plan Your Beer Crawl
+            </a>
+            <a class="navbar-item" href="../Learn-About-Beer/learn-beer.html">
+              Learn About Beer
+            </a>
           </div>
         </div>
       </nav>
-
-
   <section class="section">
     <div class="container">
       <h1 class="title">
@@ -79,7 +57,7 @@
       <button id="citybtn"class="button">City Button</button>
     </div>
   </section>
-
-  <script src="./scripts.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+  <script src="brewery-search.js"></script>
   </body>
 </html>

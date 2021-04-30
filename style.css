@@ -1,0 +1,12 @@
+
+
+.navbar-brand {
+    margin-right: 10%;
+}
+
+.navbar-item img {
+    max-height: none;
+    height: 65px;
+    width: 70px;
+}
+

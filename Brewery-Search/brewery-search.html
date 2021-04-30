@@ -9,54 +9,48 @@
     <link rel="stylesheet" href="brewery-search.css">
   </head>
   <body>
-    <nav id="nav" class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-          <a class="navbar-item" href="../Homepage/home.html">
-            <img id="hop-brand" src="../Images/hop-3.png">
-            <h2>The Hopperator</h2>
-          </a>
-        </div>
-        <div id="navbarBasicExample" class="navbar-menu">
-          <div class="navbar-start">
+    <header>
+      <nav id="nav" class="navbar" role="navigation" aria-label="main navigation">
+          <div class="navbar-brand">
             <a class="navbar-item" href="../Homepage/home.html">
-              Home
-            </a>
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">
-                Search Breweries
-              </a>
-              <div class="navbar-dropdown">
-                <a class="navbar-item" href="brewery-search.html">
-                  New Search
-                </a>
-                <a class="navbar-item" href="../Favorites/favorites.html">
-                  Favorites
-                </a>
-              </div>
-            </div>
-            <a class="navbar-item" href="../Beer-Crawl-Map/beer-map.html">
-              Plan Your Beer Crawl
-            </a>
-            <a class="navbar-item" href="../Learn-About-Beer/learn-beer.html">
-              Learn About Beer
+              <img id="hop-brand" src="../Images/hop-3.png">
+              <h2>The Hopperator</h2>
             </a>
           </div>
+          <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+              <a class="navbar-item" href="../Homepage/home.html">
+                Home
+              </a>
+              <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
+                  Search Breweries
+                </a>
+                <div class="navbar-dropdown">
+                  <a class="navbar-item" href="brewery-search.html">
+                    New Search
+                  </a>
+                  <a class="navbar-item" href="../Favorites/favorites.html">
+                    Favorites
+                  </a>
+                </div>
+              </div>
+              <a class="navbar-item" href="../Beer-Crawl-Map/beer-map.html">
+                Plan Your Beer Crawl
+              </a>
+              <a class="navbar-item" href="../Learn-About-Beer/learn-beer.html">
+                Learn About Beer
+              </a>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <section class="section" id="search-bar">
+        <div class="container">
+          <input id="bulma_fetch" class="input" type="text" placeholder="Enter a city name">
+          <button id="citybtn"class="button">Cheers!</button>
         </div>
-      </nav>
-  <section class="section">
-    <div class="container">
-      <h1 class="title">
-        Hello World
-      </h1>
-      <p class="subtitle">
-        My first website with <strong>Bulma</strong>!
-      </p>
-      <p >Show me my fetch results</p>
-      <input id="bulma_fetch" class="input" type="text" placeholder="Text input">
-      <input class="button" type="text" placeholder="Beer Button">
-      <button id="citybtn"class="button">City Button</button>
-    </div>
-  </section>
+      </section>
   <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
   <script src="brewery-search.js"></script>
   </body>

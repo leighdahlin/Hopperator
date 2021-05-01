@@ -1,12 +1,65 @@
 
-
-.navbar-brand {
-    margin-right: 10%;
+:root {
+    --off-white: #faf3dd;
+    --light-green: #c8d5b9;
+    --blue-green: #8fc0a9;
+    --blue: #68b0ab;
+    --dark-green: #4a7c59;
 }
 
-.navbar-item img {
+html {
+    background-color: #c8d5b9;
+}
+
+body, button, input, select, textarea {
+    font-family: 'Roboto Slab', serif;
+}
+
+nav {
+    padding: 1%;
+    padding-right: 2%;
+    padding-left: 2%;
+    background-color: #faf3dd;
+    
+}
+
+.level:not(:last-child) {
+    margin-bottom: 0rem;
+}
+
+.level-item img {
     max-height: none;
     height: 65px;
     width: 70px;
 }
+
+nav h1 {
+    font-size: 2.25rem;
+    font-family: 'Shrikhand', cursive;
+    background-color: inherit;
+    color: inherit;
+}
+
+nav a, a.navbar-link {
+    font-size: 1.25rem;
+    color: var(--dark-green);
+    margin-left: 25px;
+    font-family: 'Roboto Slab', serif;
+}
+
+a.navbar-link.is-active, a.navbar-link:hover, nav a.is-active, nav a:hover {
+    background-color: none;
+    color: var(--blue);
+}
+
+h1 {
+    font-size: 5rem;
+    text-align: center;
+    background-color: var(--dark-green);
+    color: var(--off-white);
+    font-family: 'Shrikhand', cursive;
+    padding-top: 4%;
+    padding-bottom: 4%;
+}
+
 

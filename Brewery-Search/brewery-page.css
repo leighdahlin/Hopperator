@@ -1,0 +1,46 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+.full-height {
+    height: 100%;
+  }
+
+main{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+#return {
+    margin: 2%;
+
+}
+
+.card {
+    height: 50%;
+    padding: 2%;
+}
+
+.card-image{
+    height: 60%;
+}
+
+.image {
+    height: 100%;
+}
+
+/* targets the brewery image - Bulma selector */
+.image.is-4by3 img {
+}
+
+
+.image.is-4by3 {
+    padding-top: 15%;
+}
+
+.card-header{
+    padding: 3%;
+    margin-bottom: 2%;
+}

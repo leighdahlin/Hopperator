@@ -8,3 +8,16 @@
     --blue: #68b0ab;
     --dark-green: #4a7c59;
 }
+
+.input-container {
+    display: flex;
+    justify-content: center;
+}
+
+.input {
+    width:15%;
+    margin-right: 1%;
+}
+
+
+

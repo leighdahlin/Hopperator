@@ -4,11 +4,18 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>The Hopperator: Search Breweries</title>
+        <!-- Bulma script call -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+        <!-- Font script call -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
+        <!-- Specific Font call -->
         <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&family=Shrikhand&display=swap" rel="stylesheet"> 
+        <!-- Overall CSS style -->
         <link rel="stylesheet" href="../style.css">
+        <!-- ##Beer Map Style## -->
         <link rel="stylesheet" href="beer-map.css">
+        <!-- Maps Polygon something or other -->
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
       </head>
       <body>
         <header>
@@ -57,22 +64,37 @@
             <h3 class="subtitle">
               Input your specifications below:
             </h3>
-
             <!-- Bulma form inputs: https://bulma.io/documentation/form/input/ -->
+            
+            <!-- Coordination Input form for the location of the map -->
+            <div id="coordform">
+              <form>
+                  <input id="lat" type="number" placeholder="Lat">
+                  <input id="long" type="number" placeholder="Long">
+                  <input type="search" placeholder="Lat , Long">
+                  <input id="submitLatLong" type="button" value="Gimme beer from here!">
+              </form>
+            </div>
+
 
           </section>
 
           <section class="section map">
             <h2 class="title">Beer Map</h2>
             <h3 class="subtitle">
+              Input the lat / long for the beer locations you would like to search near
                 <!-- Insert subtitle or delete h3 element if not needed -->
             </h3>
 
-                <!-- Insert map here -->
+            <!-- Insert map here -->
+            <div id="map"></div>
 
           </section>
           
         <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
         <script src="beer-map.js"></script>
+        <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJ5xOqWFD8CKYBEYTsxWnzQEXKuRjEQww&libraries=geometry,places,drawing,visualization&callback=initMap">
+        </script>
     </body>
 </html>

@@ -5,7 +5,7 @@ oldsoulLong = -121.4780
 function initMap() {
 
     const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 13, // 1:world 5:continent 10:city 20:buildings
+      zoom: 15, // 1:world 5:continent 10:city 20:buildings
       center: { lat: 38.575, lng: -121.494 }, // This is where you can start the search nearby. (sacs coord are this... )
     });
 
@@ -59,13 +59,13 @@ drawingManager.setMap(map);
 // // Simple Map
 // let map;
 
-// function initMap() {
-//   map = new google.maps.Map(document.getElementById("map"), {
-//     //   Where your map will inherently start at.
-//     center: { lat: 38.575, lng: -121.494 },
-//     zoom: 12,
-//   });
-// }
+function initMap() {
+  map = new google.maps.Map(document.getElementById("map"), {
+    //   Where your map will inherently start at.
+    center: { lat: 38.575, lng: -121.494 },
+    zoom: 12,
+  });
+}
 
-// var drawingManager = new google.maps.drawing.DrawingManager();
-// drawingManager.setMap(map);
+var drawingManager = new google.maps.drawing.DrawingManager();
+drawingManager.setMap(map);

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add Map</title>
+    <!-- <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJ5xOqWFD8CKYBEYTsxWnzQEXKuRjEQww&callback=initMap&libraries=&v=weekly"
+      defer
+    ></script> -->
+    <link rel="stylesheet" type="text/css" href="./map.css" />
+    
+    <script src="./map.js"></script>
+  </head>
+  <body>
+    <h3>Google Maps Demo</h3>
+    <!--The div element for the map -->
+    <div id="map"></div>
+    <div id="coordform">
+        <form>
+            <input id="lat" type="number" placeholder="Lat">
+            <input id="long" type="number" placeholder="Long">
+            <input type="search" placeholder="Lat , Long">
+            <input id="submitLatLong" type="button" placeholder="Gimme LATLONG">
+        </form>
+    </div>
+
+    <!-- Drawing library that allows us to add points to the maps -->
+    <!-- <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJ5xOqWFD8CKYBEYTsxWnzQEXKuRjEQww&libraries=drawing&callback=initMap">
+    </script>
+    <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJ5xOqWFD8CKYBEYTsxWnzQEXKuRjEQww&libraries=visualization&callback=initMap">
+    </script> -->
+    <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJ5xOqWFD8CKYBEYTsxWnzQEXKuRjEQww&libraries=geometry,places,drawing,visualization&callback=initMap">
+    </script>
+  </body>
+</html>

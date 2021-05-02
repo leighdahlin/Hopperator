@@ -1,0 +1,17 @@
+/* color palette obtained from coolors.com */
+/* picutes obtained from pexels.com */
+
+:root {
+    --off-white: #faf3dd;
+    --light-green: #c8d5b9;
+    --blue-green: #8fc0a9;
+    --blue: #68b0ab;
+    --dark-green: #4a7c59;
+}
+
+#map {
+    height: 400px;
+    /* The height is 400 pixels */
+    width: 100%;
+    /* The width is the width of the web page */
+  }

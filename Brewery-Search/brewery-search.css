@@ -1,0 +1,89 @@
+/* color palette obtained from coolors.com */
+/* picutes obtained from pexels.com */
+
+:root {
+    --off-white: #faf3dd;
+    --light-green: #c8d5b9;
+    --blue-green: #8fc0a9;
+    --blue: #68b0ab;
+    --dark-green: #4a7c59;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+main {
+    height: 100%;
+}
+
+.full-height {
+    height: 100%;
+}
+
+h2{
+    text-align: center;
+}
+
+.input-container {
+    display: flex;
+    justify-content: center;
+}
+
+.input {
+    width:15%;
+    margin-right: 1%;
+}
+
+.select {
+    margin-right: 1%;
+}
+
+.breweries-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* targets the brewery name - Bulma selector */
+.content p:not(:last-child) {
+    margin-bottom: 20%;
+}
+
+.card {
+    margin-bottom: 1.5%;
+    width: 70%;
+}
+
+.card-header{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+#hop-brand {
+    display: inline;
+    max-height: none;
+    height: 65px;
+    width: 70px;
+}
+
+.content .name {
+    display: inline;
+    margin-left: 1%;
+}
+
+ul {
+    width: 100%;
+}
+
+li {
+    list-style-type: none;
+    padding: .75%;
+}
+
+ul li img {
+    margin-right: 1%;
+
+}

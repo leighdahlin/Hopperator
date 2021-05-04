@@ -142,6 +142,8 @@ usrinputBtn.addEventListener("click",function(){
 })
 
 viewMapBtn.addEventListener("click", function(){
+    viewMapBtn.setAttribute("class","hidden")
+
     var divider = centerCoordinates.length;
     createCenter();
     centerLat = parseFloat(latitudesSum/divider);

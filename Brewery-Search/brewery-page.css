@@ -9,27 +9,63 @@ body, html {
 
 main{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     height: 100%;
+    margin: 1%;
 }
 
-#return {
+.button-container {
+    display: flex;
+    justify-content: space-between;
     margin: 2%;
 
 }
 
-.card {
+#return {
+    margin-left: 8%;
+}
+
+#favorite {
+    margin-right: 8%;
+}
+
+.container{
     height: 50%;
-    padding: 2%;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+.card {
+    /* height: 30%; */
+    padding: 1%;
+    /* margin-bottom: 0rem; */
+    /* width: 50%; */
+    width:40vw;
+    height:30vw;
+    margin: 1%;
+
 }
 
 .card-image{
-    height: 60%;
+    height: 100%;
+   margin: 1%;
 }
 
-.image {
+/* .image {
     height: 100%;
-}
+} */
+
+figure {
+    width:40vw;
+    height:30vw;
+ }
+ .brew-img {
+    max-width:100%;
+    height:auto;
+    max-height:100%;
+ }
 
 /* targets the brewery image - Bulma selector */
 .image.is-4by3 img {
@@ -43,4 +79,16 @@ main{
 .card-header{
     padding: 3%;
     margin-bottom: 2%;
+}
+
+.map-visible {
+    height: 30%;
+    /* The height is 400 pixels */
+    width: 80%;
+    /* The width is the width of the web page */
+    margin-top: 5%;
+  }
+
+.hidden {
+    display: none;
 }

@@ -21,7 +21,7 @@ usrinputBtn.addEventListener("click",function(){
     centerCoordinates = [] //clears coordinates array
     latitudesSum = 0; //clears out previous sum   
     longitudesSum = 0; //clears out previous sum
-    viewMapBtn.setAttribute("class","mapbtn")
+    viewMapBtn.setAttribute("class","button mapbtn")
     mapEl.setAttribute("class","hidden");
   
 
@@ -150,7 +150,7 @@ viewMapBtn.addEventListener("click", function(){
     console.log(centerLong);
 
     mapEl.setAttribute("class","map-visible");
-    mapEl.setAttribute("style","height:50vh;");
+    mapEl.setAttribute("style","height:35vh;");
 
     initMap(centerLat,centerLong);
 

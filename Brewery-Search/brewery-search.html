@@ -117,6 +117,7 @@
               </div>
               <button id="citybtn" class="button" type="button">Cheers!</button>
             </div>
+            <button id="mapbtn" class="button hidden" type="button">See on Map</button>
           </section>
           <section class="section breweries-list">
             <!-- <h3 class="title"></h3> -->
@@ -139,12 +140,18 @@
               </div>
             </div> -->
           </section>
+          <section class="map">
+            <div id="map" class="hidden"></div>
+          </section>
         </main>
         <footer>
           <div>Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
         </footer>
       <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
       <script src="brewery-search.js"></script>
+      <script async
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJ5xOqWFD8CKYBEYTsxWnzQEXKuRjEQww&libraries=geometry,places,drawing,visualization&callback=initMap">
+            </script>
     </body>
     
   </div>

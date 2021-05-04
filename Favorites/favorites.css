@@ -8,3 +8,9 @@
     --blue: #68b0ab;
     --dark-green: #4a7c59;
 }
+
+.favorites-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

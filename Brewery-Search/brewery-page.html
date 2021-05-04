@@ -53,28 +53,32 @@
                 Brewery Information
                 </h1>
             </header>
-                <a href="brewery-search.html"><button id="return" type="button" class="button">Return to Previous Page</button></a>
+                <div class="button-container">
+                    <a href="brewery-search.html" id="return"><button type="button" class="button">Return to Previous Page</button></a>
+                    <button id="favorite" type="button" class="button">Add to Favorites</button>
+                </div>
                 <main>
-                    <div class="card">
+                    <div class="container">
                         <div class="card-image">
                             <figure class="image is-4by3">
-                                <img class="brew-img" src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                                <img class="brew-img" src="https://s3-media0.fl.yelpcdn.com/bphoto/Pg1LYOXePTtf1cxK9wUvrQ/o.jpg" alt="Placeholder image">
                             </figure>
                         </div>
-                        <div class="card-content">
-                        <div class="card-header">
-                            <div class="title">
-                            <p class="title is-4">Brewery Name</p>
-                            <p class="subtitle is-6"></p>
+                        <div class="card">
+                            <div class="card-content">
+                            <div class="card-header">
+                                <div class="title">
+                                <p id="brew-name" class="title is-4">Brewery Name</p>
+                                <p class="subtitle is-6"></p>
+                                </div>
+                            </div>
+                        
+                            <div class="content info">
+                            </div>
                             </div>
                         </div>
-                    
-                        <div class="content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                        </div>
-                        </div>
                     </div>
+                    <div id="map" class="hidden map-visible"></div>
                 </main>
                 <footer>
                     <div>Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
@@ -82,6 +86,9 @@
         
             <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
             <script src="brewery-page.js"></script>
+            <script async
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJ5xOqWFD8CKYBEYTsxWnzQEXKuRjEQww&libraries=geometry,places,drawing,visualization&callback=initMap">
+            </script>
         </body>
     </div>
 </html>

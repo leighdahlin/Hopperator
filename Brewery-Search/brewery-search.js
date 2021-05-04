@@ -13,7 +13,9 @@ usrinputBtn.addEventListener("click",function(){
     city = city.toLowerCase();
     var state = usrStateInput.options[usrStateInput.selectedIndex].text
     state = state.toLowerCase();
-    var newUrl = beer_api + "?by_state=" + state + "&?by_city=" + city + "&per_page=20"
+    var newUrl = beer_api + "?by_city=" + city + "&?by_state=" + state + "&per_page=50"
+
+    console.log(newUrl);
 
     fetch(newUrl)
     .then(function (response) {
@@ -55,6 +57,9 @@ usrinputBtn.addEventListener("click",function(){
 
             var ulEl = document.createElement("ul");
             infoDiv.appendChild(ulEl);
+
+            console.log("City: " + data[i].city)
+            console.log("State: " + data[i].state)
 
             var brewUrl = data[i].website_url;
 

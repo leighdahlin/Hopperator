@@ -97,9 +97,8 @@ ul li img {
 .map-visible {
     height: 35%;
     /* The height is 400 pixels */
-    width: 80%;
+    width: 85%;
     /* The width is the width of the web page */
-    bottom: 15%;
   }
 
 .hidden {

@@ -104,18 +104,10 @@ function initMap(brewlat,brewlong,name) {
     var marker = new google.maps.Marker({
        position: prop.coordinates, // Passing the coordinates
        map:map, //Map that we need to add
-       draggarble: false// If set to true you can drag the marker
+       draggarble: false,// If set to true you can drag the marker
+       title:prop.content
     });
-    if(prop.iconImage) { marker.setIcon(prop.iconImage); }
-    if(prop.content) { 
-       var information = new google.maps.InfoWindow({
-       content: prop.content
-       });
-       
-       marker.addListener('click', function() {
-       information.open(map, marker);
-       });
-    }
+    
  }
  
 

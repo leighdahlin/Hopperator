@@ -1,3 +1,61 @@
+byPostalUrl = "https://api.openbrewerydb.org/breweries?by_postal=95451"
+var breweryName = []
+var breweryLat = []
+var breweryLong = []
+var marker = []
+
+fetch(byPostalUrl)
+.then(function(response){
+return response.json();
+})
+.then(function(data){
+
+var breweryArray = data
+console.log(breweryArray)
+
+
+for (let i = 0; i < breweryArray.length; i++) {
+  addMarker({lat: parseFloat(breweryArray[i].latitude), lng:parseFloat(breweryArray[i].longitude)},breweryArray[i].name)
+}
+
+})
+
+function addMarker(coordinates,names) {
+   var marker = new google.maps.Marker({
+      position: coordinates, // Passing the coordinates
+      map:map, //Map that we need to add
+      title: names ,
+   });
+}
+
+
+function initMap() {
+  myLatLng = { lat: 38.5603, lng: -121.4970 };
+  map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 12,
+    center: myLatLng,
+  });
+
+  new google.maps.Marker({
+    position: myLatLng,
+    map,
+    title: "Sacramento!",
+  });  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // fetch
 
 // let map;
@@ -83,31 +141,152 @@
 oldsoulLat = 38.5781
 oldsoulLong = -121.4780
 
-beer_api = "https://api.openbrewerydb.org/breweries"
-
-fetch('http://example.com/movies.json')
-  .then(response => response.json())
-  .then(data => console.log(data))
-;
-
-function initMap() {
-  const mySoul = {oldsoulLat,oldsoulLong}
-  const myCity = { lat: 38.5816, lng: -121.4944};
-  const myBreweries = [{lat: 38.58 , lng: -121.49 }, {lat: 38.57 , lng: -121.48 }];
-
-  const map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 12,
-    center: myCity,
-  });
-
-  new google.maps.Marker({position: myCity,map,title: "Hello World!",});
-  console.log("++Breweries LAT/LONG++");
-
-  for (let i = 0; i < myBreweries.length; i++) {
-    console.log("Brew Lat/Long for entry: "+i);
-    console.log(myBreweries[i])
-    new google.maps.Marker({position: myBreweries[i],map,title: "Brew of: "+i,});
-  }
-  new google.maps.Marker({position: myCity,map,title: "Dis My City",});
+// beer_api = "https://api.openbrewerydb.org/breweries"
+// // "https://api.openbrewerydb.org/breweries?by_distance=38.8977,77.0365"
+// for (let i = 0; i < brew.length; i++) {
+//   const element = array[i];
   
-}
+// }
+
+// async function fetchData() {
+//   confirm("Running")
+
+
+
+
+
+  // let response = await fetch(byPostalUrl)
+  // .then(response => response.json())
+  // .then(function(data){
+  //   brewObj = data
+
+  //   var myBreweries = [brewObj[0],brewObj[1]];
+  //   console.log("Hardcoded breweries as an array: "+ myBreweries);
+
+
+  //   for (let index = 0; index < brewObj.length; index++) {
+  //   console.log("for loop brew object w index is: "+brewObj[0])
+  //   var myCity = { lat: 38.5816, lng: -121.4944};
+  //   var currentBrewery = brewObj[index];
+  //   var latitude = currentBrewery.latitude
+  //   var longitude = currentBrewery.longitude
+  //   var breweryName = currentBrewery.name 
+
+  //   console.log("current lat is : "+latitude);
+  //   console.log("current long is : "+longitude);
+  //   map.markers.push
+
+  //   markerObj = {
+  //     position : myBreweries[index],
+
+  //   }
+
+
+  //   // myBreweries[index] = {lat: parseFloat(latitude) , lng: parseFloat(longitude)};
+  //   // localStorage.setItem(brewName,)
+    
+  //   // console.log(latitude)
+  //   // console.log(longitude)
+
+  //   // initMap(latitude,longitude,brewName);
+
+  //   // function initMap(lat,long,brewName) {
+      
+  //     // console.log("++Initializing Map++");
+  //     // console.log("breweries lat init: "+ lat);
+  //     // console.log("breweries long init: "+ long);
+  //     // console.log("breweries name init: "+ brewName);
+      
+  //   // }
+
+//     };
+
+//     function initMap() {
+//       const myLatLng = { lat: -25.363, lng: 131.044 };
+//       const map = new google.maps.Map(document.getElementById("map"), {
+//         zoom: 4,
+//         center: myLatLng,
+//       });
+//       new google.maps.Marker({
+//         position: myLatLng,
+//         map,
+//         title: "Hello World!",
+//       });
+//     };
+
+//     console.log(myBreweries)
+
+
+//     function mapmaker() {
+//       for (let index = 0; index < myBreweries.length; index++) {
+
+
+//         console.log(myBreweries[index])
+
+//         const map = new google.maps.Map(document.getElementById("map"), {
+//           zoom: 10,
+//           center: myCity,
+//         });
+
+//         new google.maps.Marker({
+//           position: myBreweries[index],
+//           map,
+//           title: breweryName,}
+//         );
+
+//         new google.maps.Marker({
+//           position: myCity,
+//           map,
+//           title: "Dis My City",
+//           });
+        
+//       }
+//     }
+
+//     mapmaker();
+
+
+//   });
+
+//   // let response = await fetch(byPostalUrl);
+//   // let data = await response.json();
+//   // data = JSON.stringify(data);
+//   // data = JSON.parse(data);
+//   // console.log(data)
+//   // return data;
+// }
+
+
+
+// function initMap(lat,long,brewName) {
+  
+//   console.log("++Initializing Map++");
+//   console.log("breweries lat init: "+ lat);
+//   console.log("breweries long init: "+ long);
+//   console.log("breweries name init: "+ brewName);
+
+//   myCity = { lat: 38.5816, lng: -121.4944};
+//   myBreweries = {lat: parseFloat(lat) , lng: parseFloat(long) };
+//   console.log(myBreweries)
+//   breweryName = brewName
+
+//   const map = new google.maps.Map(document.getElementById("map"), {
+//     zoom: 10,
+//     center: myCity,
+//   });
+
+//   var something = new google.maps.Marker({
+//     position: myBreweries,
+//     map,
+//     title: breweryName,}
+//   );
+
+//   something
+
+//   new google.maps.Marker({
+//     position: myCity,
+//     map,
+//     title: "Dis My City",
+//     });
+  
+// }

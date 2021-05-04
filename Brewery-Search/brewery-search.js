@@ -1,26 +1,29 @@
 //Assign selector variables
+var fullHeightDiv = document.querySelector("#full-height")
 var usrinputBtn = document.querySelector("#citybtn")
 var usrCityInput = document.querySelector("#city")
 var usrStateInput = document.querySelector("#state")
 var viewMapBtn = document.querySelector("#mapbtn")
 var mapEl = document.querySelector('#map')
 var brewListEl = document.querySelector(".breweries-list")
-var centerLat = 0;
-var centerLong = 0;
+var centerLat = 38.5816; //using center of Sacrametno to initialize map
+var centerLong = -121.4944; //using center of Sacrametno to initialize map
 var centerCount = 0;
 var centerCoordinates = []
 var latitudesSum = 0;
 var longitudesSum = 0;
 
-
 beer_api = "https://api.openbrewerydb.org/breweries"
 
-//want to "send"
-
 usrinputBtn.addEventListener("click",function(){
+    fullHeightDiv.setAttribute("class","")//removes full height class when results are displayed
     brewListEl.innerHTML=""; //removes previous search results when clicked
     centerCoordinates = [] //clears coordinates array
+    latitudesSum = 0; //clears out previous sum   
+    longitudesSum = 0; //clears out previous sum
     viewMapBtn.setAttribute("class","mapbtn")
+    mapEl.setAttribute("class","hidden");
+  
 
     var city = usrCityInput.value.trim();
     city = city.toLowerCase();
@@ -125,10 +128,10 @@ usrinputBtn.addEventListener("click",function(){
                     centerCount = centerCount + 1;
                     var currentCoord = {
                         lat: currentLat,
-                        long: currentLong
+                        long: currentLong,
+                        name: data[i].name
                     }
                     centerCoordinates.push(currentCoord);
-                    // console.log(centerCoordinates);
                 }
                 
             } else {
@@ -140,7 +143,6 @@ usrinputBtn.addEventListener("click",function(){
 
 viewMapBtn.addEventListener("click", function(){
     var divider = centerCoordinates.length;
-    console.log("Button pressed!")
     createCenter();
     centerLat = parseFloat(latitudesSum/divider);
     centerLong = parseFloat(longitudesSum/divider);
@@ -148,22 +150,19 @@ viewMapBtn.addEventListener("click", function(){
     console.log(centerLong);
 
     mapEl.setAttribute("class","map-visible");
+    mapEl.setAttribute("style","height:50vh;");
 
-    initMap();
+    initMap(centerLat,centerLong);
 
-    function initMap() {
-        myLatLng = { lat: centerLat, lng: centerLong };
-        map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 12,
-          center: myLatLng,
-        });
-      
-        new google.maps.Marker({
-          position: myLatLng,
-          map,
-          title: "Sacramento!",
-        });  
-      }
+    for(var i=0; i<centerCoordinates.length; i++) {
+        var brewLat = parseFloat(centerCoordinates[i].lat);
+        var brewLon = parseFloat(centerCoordinates[i].long)
+        var coordinates = { lat: brewLat, lng: brewLon }
+        console.log(coordinates);
+        var brewName = centerCoordinates[i].name
+        addMarker(coordinates,brewName)
+    }
+
 })
 
 function createCenter() {
@@ -183,18 +182,35 @@ for(var i=0; i<centerCoordinates.length; i++) {
 return latitudesSum,longitudesSum;
 }
 
+function initMap(bLat,bLong) {
+    console.log("running initMap")
+    myLatLng = { lat: bLat, lng: bLong };
+    map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 12,
+      center: myLatLng,
+    });
+  
+    // new google.maps.Marker({
+    //   position: myLatLng,
+    //   map,
+    //   title: "Sacramento!",
+    // });
+    
+}
+
+  
+
 function addMarker(coordinates,names) {
+    console.log("Function running")
     var marker = new google.maps.Marker({
        position: coordinates, // Passing the coordinates
        map:map, //Map that we need to add
-       title: names ,
+       title: names,
     });
- }
- 
- 
- 
 
+ };
 
+ 
 
 //  addMarker({
 //     coordinates:{lat: brewlat, lng: brewlong},

@@ -16,6 +16,13 @@ body, html {
 
 main {
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.full-height {
+    height: 100%;
 }
 
 h2{
@@ -41,11 +48,18 @@ h2{
     text-align: center;
 }
 
+/* #list-map {
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+} */
+
 .breweries-list {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
+    width: 60%;
 }
 
 /* targets the brewery name - Bulma selector */
@@ -55,7 +69,7 @@ h2{
 
 .card {
     margin-bottom: 1.5%;
-    width: 70%;
+    width: 100%;
 }
 
 .card-header{
@@ -90,13 +104,28 @@ ul li img {
 
 }
 
-.map-visible {
-    height: 30%;
+/* .map {
+    height: 100vh;
+    width: 50%;
+} */
+
+/* .map-visible { */
+    /* height: 50%; */
     /* The height is 400 pixels */
-    width: 80%;
+    /* width: 50%; */
     /* The width is the width of the web page */
-    margin-top: 5%;
-  }
+    /* margin-top: 5%;
+    height: 100vh;
+    width: 100%;
+    left: 100%;
+  } */
+
+.map-visible {
+height: 35%;
+/* The height is 400 pixels */
+width: 80%;
+/* The width is the width of the web page */
+}
 
 .hidden {
     display: none;

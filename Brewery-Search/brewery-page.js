@@ -119,21 +119,32 @@ function initMap(brewlat,brewlong,name) {
 }
 
 breweryFavBtn.addEventListener("click", function(){
-   for (i=0; i<breweryFavorites.length; i++) {
-      if(breweryFavorites[i] === breweryId) {
-         breweryFavBtn.textContent = "Favorite"
-         breweryFavorites.push(breweryId);
-   localStorage.setItem("favBreweries", JSON.stringify(breweryFavorites));
-      } else {
-         console.log("Id not in local storage")
-      }
-   }
    
-   // console.log("Favorite button clicked!")
-   // console.log(breweryFavorites)
+   checkFavorites();
+   if (checkFavorites()) {
+      console.log("Already favorite") //if already in local storage, does nothing
+   } else {
+      console.log("Not favorited yet") //if  not in local storage, adds to local storage
+      breweryFavorites.push(breweryId);
+      localStorage.setItem("favBreweries", JSON.stringify(breweryFavorites));
+   }
 
 })
 
+//checks to see if the brewery has already been added to local storage
+function checkFavorites() {
+   for (i=0; i<breweryFavorites.length; i++) {
+      if(breweryId === breweryFavorites[i]) {
+         breweryFavBtn.textContent = "Favorite"
+         var isFavorite = true
+      } else {
+         console.log("Id not in local storage")
+         isFavorite = false
+      }
+   }
+   return isFavorite;
+}
 
 
  getId();
+ checkFavorites();

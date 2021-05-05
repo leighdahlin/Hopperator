@@ -119,12 +119,21 @@ function initMap(brewlat,brewlong,name) {
 }
 
 breweryFavBtn.addEventListener("click", function(){
-   breweryFavorites.push(breweryId);
+   for (i=0; i<breweryFavorites.length; i++) {
+      if(breweryFavorites[i] === breweryId) {
+         breweryFavBtn.textContent = "Favorite"
+         breweryFavorites.push(breweryId);
    localStorage.setItem("favBreweries", JSON.stringify(breweryFavorites));
-   console.log("Favorite button clicked!")
-   console.log(breweryFavorites)
+      } else {
+         console.log("Id not in local storage")
+      }
+   }
+   
+   // console.log("Favorite button clicked!")
+   // console.log(breweryFavorites)
 
 })
+
 
 
  getId();

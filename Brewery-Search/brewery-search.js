@@ -40,8 +40,10 @@ usrinputBtn.addEventListener("click",function(){
     .then(function (data) {
 
         for (i=0; i < data.length; i++) {
-            if(state == data[i].state) {
 
+            //only displays breweries that match the state selected by user and are not in planning
+            if(state == data[i].state && data[i].brewery_type !== "planning") {
+                console.log("Match" + i)
                 var firstDiv = document.createElement('div');
                 firstDiv.setAttribute("class", "card");
                 
@@ -107,21 +109,34 @@ usrinputBtn.addEventListener("click",function(){
                 var brewTypeEl = document.createTextNode("Brewery Type: " + brewType);
                 liUrl2.appendChild(brewTypeEl);
                 ulEl.appendChild(liUrl2);
-    
+                
+                
+                brewPhone = data[i].phone;
+
+
+                if(brewPhone === null) {
+                    console.log(data[i].website_url);
+                } else {
+                //for all phone numbers, puts them in the same format and addes dashes
+                var arrayBP = brewPhone.split("-");
+                var joinBP = arrayBP.join("");
+                var brewPhoneDash = joinBP.slice(0,3) + "-" + joinBP.slice(3,6) + "-" + joinBP.slice(6);
+                console.log(brewPhoneDash)
+
                 var liUrl3 = document.createElement("li");
                 var imgIcon3 = document.createElement("img");
                 imgIcon3.setAttribute("class","icon");
                 imgIcon3.setAttribute("src","../Images/beer-icon.png");
                 liUrl3.appendChild(imgIcon3);
-                var brewPhone = document.createTextNode("Phone number: " + data[i].phone)
+                var brewPhone = document.createTextNode("Phone number: " + brewPhoneDash)
                 liUrl3.appendChild(brewPhone);
                 ulEl.appendChild(liUrl3);
+                }
     
                 brewListEl.appendChild(firstDiv);
     
                 if(data[i].latitude === null) {
                     console.log("Coordinates null");
-                    return;
                 } else {
                     currentLat = parseFloat(data[i].latitude);
                     currentLong = parseFloat(data[i].longitude);

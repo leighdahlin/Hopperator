@@ -104,18 +104,10 @@ function initMap(brewlat,brewlong,name) {
     var marker = new google.maps.Marker({
        position: prop.coordinates, // Passing the coordinates
        map:map, //Map that we need to add
-       draggarble: false// If set to true you can drag the marker
+       draggarble: false,// If set to true you can drag the marker
+       title:prop.content
     });
-    if(prop.iconImage) { marker.setIcon(prop.iconImage); }
-    if(prop.content) { 
-       var information = new google.maps.InfoWindow({
-       content: prop.content
-       });
-       
-       marker.addListener('click', function() {
-       information.open(map, marker);
-       });
-    }
+    
  }
  
 
@@ -127,12 +119,32 @@ function initMap(brewlat,brewlong,name) {
 }
 
 breweryFavBtn.addEventListener("click", function(){
-   breweryFavorites.push(breweryId);
-   localStorage.setItem("favBreweries", JSON.stringify(breweryFavorites));
-   console.log("Favorite button clicked!")
-   console.log(breweryFavorites)
+   
+   checkFavorites();
+   if (checkFavorites()) {
+      console.log("Already favorite") //if already in local storage, does nothing
+   } else {
+      console.log("Not favorited yet") //if  not in local storage, adds to local storage
+      breweryFavorites.push(breweryId);
+      localStorage.setItem("favBreweries", JSON.stringify(breweryFavorites));
+   }
 
 })
 
+//checks to see if the brewery has already been added to local storage
+function checkFavorites() {
+   for (i=0; i<breweryFavorites.length; i++) {
+      if(breweryId === breweryFavorites[i]) {
+         breweryFavBtn.textContent = "Favorite"
+         var isFavorite = true
+      } else {
+         console.log("Id not in local storage")
+         isFavorite = false
+      }
+   }
+   return isFavorite;
+}
+
 
  getId();
+ checkFavorites();

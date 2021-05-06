@@ -16,6 +16,27 @@ body, html {
 
 main {
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.modal-card {
+    background-color: var(--blue);
+}
+
+.modal-text {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--off-white)
+}
+
+#search-bar {
+    padding-bottom: 1rem;
 }
 
 h2{
@@ -36,16 +57,30 @@ h2{
     margin-right: 1%;
 }
 
+.mapbtn-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
 .mapbtn {
+    height: 3rem;
+    width: 10rem;
     display: block;
     text-align: center;
+    border-radius: 8px;
+    font-size: 1.25rem;
+    color: var(--off-white);
+    background-color: var(--blue);
+    border: 2px solid var(--dark-green);
 }
+
 
 .breweries-list {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
+    width: 60%;
 }
 
 /* targets the brewery name - Bulma selector */
@@ -55,7 +90,7 @@ h2{
 
 .card {
     margin-bottom: 1.5%;
-    width: 70%;
+    width: 100%;
 }
 
 .card-header{
@@ -90,13 +125,28 @@ ul li img {
 
 }
 
-.map-visible {
-    height: 30%;
+/* .map {
+    height: 100vh;
+    width: 50%;
+} */
+
+/* .map-visible { */
+    /* height: 50%; */
     /* The height is 400 pixels */
-    width: 80%;
+    /* width: 50%; */
     /* The width is the width of the web page */
-    margin-top: 5%;
-  }
+    /* margin-top: 5%;
+    height: 100vh;
+    width: 100%;
+    left: 100%;
+  } */
+
+.map-visible {
+height: 35%;
+/* The height is 400 pixels */
+width: 80%;
+/* The width is the width of the web page */
+}
 
 .hidden {
     display: none;

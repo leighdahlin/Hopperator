@@ -1,11 +1,13 @@
-var breweryNameEl = document.querySelector("#brew-name")
+var breweryNameEl = document.querySelector("#brew-name");
+var brewImageEl = document.querySelector(".brew-img");
 var breweryInfoEl = document.querySelector(".info");
-var breweryFavBtn = document.querySelector("#favorite")
-var mapEl = document.querySelector("#map")
+var breweryFavBtn = document.querySelector("#favorite");
+var mapEl = document.querySelector("#map");
+var imagesArray = ["../Images/beer-barrels.jpg","../Images/beer-beer-beer.jpg", "../Images/beer-glass.jpg", "../Images/beer-ontap.jpg","../Images/beer-pour.jpg", "../Images/beer-signs-lightup.jpg", "../Images/beer-taps.jpg", "../Images/cans-beer.jpg", "../Images/friends-beer.jpg", "../Images/more-beer-taps.jpg", "../Images/pour-beer.jpg"]
 var breweryId
 var breweryLatitude
 var breweyLongitude
-var breweryFavorites = JSON.parse(localStorage.getItem("favBreweries")) || []
+var breweryFavorites = JSON.parse(localStorage.getItem("favBreweries")) || [];
 
 
 function getId() {
@@ -14,6 +16,13 @@ function getId() {
    breweryId = Id;
    getInfo();
   };
+
+function displayRandomImage(){
+   var randomImage = imagesArray[Math.floor(Math.random()*imagesArray.length)];
+   brewImageEl.setAttribute("src",randomImage);
+   console.log(randomImage)
+
+}
 
 function getInfo() {
    var url = "https://api.openbrewerydb.org/breweries/" + breweryId;
@@ -42,14 +51,22 @@ function getInfo() {
       liUrl2.appendChild(brewTypeEl);
       ulEl.appendChild(liUrl2);
 
+      brewPhone = data.phone;      
+      if(brewPhone === null) {
+      } else {
+      //for all phone numbers, puts them in the same format and addes dashes
+      var arrayBP = brewPhone.split("-");
+      var joinBP = arrayBP.join("");
+      var brewPhoneDash = joinBP.slice(0,3) + "-" + joinBP.slice(3,6) + "-" + joinBP.slice(6);
       var liUrl3 = document.createElement("li");
       var imgIcon3 = document.createElement("img");
       imgIcon3.setAttribute("class","icon");
       imgIcon3.setAttribute("src","../Images/beer-icon.png");
       liUrl3.appendChild(imgIcon3);
-      var brewPhone = document.createTextNode("Phone number: " + data.phone)
+      var brewPhone = document.createTextNode("Phone number: " + brewPhoneDash)
       liUrl3.appendChild(brewPhone);
       ulEl.appendChild(liUrl3);
+      }
 
       var liUrl3 = document.createElement("li");
       var imgIcon3 = document.createElement("img");
@@ -104,18 +121,10 @@ function initMap(brewlat,brewlong,name) {
     var marker = new google.maps.Marker({
        position: prop.coordinates, // Passing the coordinates
        map:map, //Map that we need to add
-       draggarble: false// If set to true you can drag the marker
+       draggarble: false,// If set to true you can drag the marker
+       title:prop.content
     });
-    if(prop.iconImage) { marker.setIcon(prop.iconImage); }
-    if(prop.content) { 
-       var information = new google.maps.InfoWindow({
-       content: prop.content
-       });
-       
-       marker.addListener('click', function() {
-       information.open(map, marker);
-       });
-    }
+    
  }
  
 
@@ -127,12 +136,42 @@ function initMap(brewlat,brewlong,name) {
 }
 
 breweryFavBtn.addEventListener("click", function(){
-   breweryFavorites.push(breweryId);
-   localStorage.setItem("favBreweries", JSON.stringify(breweryFavorites));
-   console.log("Favorite button clicked!")
-   console.log(breweryFavorites)
+   checkFavorites();
+   if (checkFavorites()) {
+      console.log("Already favorite") //if already in local storage, does nothing
+   } else {
+      console.log("Not favorited yet") //if  not in local storage, adds to local storage
+      breweryFavorites.push(breweryId);
+      localStorage.setItem("favBreweries", JSON.stringify(breweryFavorites));
+      breweryFavBtn.textContent = "Favorite";
+      var hearticon = document.createElement("img");
+      hearticon.setAttribute("id","heart-icon");
+      hearticon.setAttribute("src","../Images/heart-icon.png")
+      breweryFavBtn.appendChild(hearticon);
+   }
 
 })
 
+//checks to see if the brewery has already been added to local storage
+function checkFavorites() {
+   for (i=0; i<breweryFavorites.length; i++) {
+      if(breweryId === breweryFavorites[i]) {
+         console.log("running")
+         breweryFavBtn.textContent = "Favorite";
+         var hearticon = document.createElement("img");
+         hearticon.setAttribute("id","heart-icon");
+         hearticon.setAttribute("src","../Images/heart-icon.png")
+         breweryFavBtn.appendChild(hearticon);
+         var isFavorite = true
+      } else {
+         console.log("Id not in local storage")
+         isFavorite = false
+      }
+   }
+   return isFavorite;
+}
+
 
  getId();
+ checkFavorites();
+ displayRandomImage();

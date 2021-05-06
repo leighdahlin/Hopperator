@@ -1,13 +1,180 @@
-query = []
-function getInputValue(){
-  // Selecting the input element and get its value 
-  var query = document.getElementById("myInput").value;
-  return query;
-};
-query = "/search?query="+query; 
+var usrQuery = document.querySelector("#myquery")
+var usrinputBtn = document.querySelector("#citybtn")
+var mapEl = document.querySelector('#map')
+
+
+usrinputBtn.addEventListener("click",function(){
+  console.log("++Leigh's Button Call++");
+    
+    usrQuery.innerHTML=""; //removes previous search results when clicked
+    centerCoordinates = [] //clears coordinates array
+    latitudesSum = 0; //clears out previous sum   
+    longitudesSum = 0; //clears out previous sum
+    mapEl.setAttribute("class","map-visible");//hides map if user makes another search
+    // viewMapBtn.setAttribute("class","button hidden") //hides map button
+    // fullHeightDiv.setAttribute("class","full-height")//resets div to full height for footer
+
+    var city = usrQuery.value.trim(); //saves the user input and trims any white space
+    city = city.toLowerCase(); //makes the input lowercase to be input into API
+    
+    // var state = usrStateInput.options[usrStateInput.selectedIndex].text
+    
+    // lowState = state.toLowerCase(); //makes the input lowercase to be input into API
+    var newUrl = beer_api + "?by_city=" + city + "&?by_state=" + lowState + "&per_page=50"
+    
+    if (usrCityInput.value == "" || usrStateInput.selectedIndex == 0) {
+        modalEl.setAttribute("class","modal is-active");
+        modalContentEl.textContent = "Please enter a city and state to continue."
+        return;
+    } else {
+
+        fetch(newUrl)
+        .then(function (response) {
+            console.log(newUrl)
+            if(response.ok) {
+                return response.json().then(function (data) {
+                usrCityInput.value = ""; //clears the city field
+                usrStateInput.selectedIndex = 0; //clears the state field
+
+                if(data.length == 0){
+                    modalEl.setAttribute("class","modal is-active");
+                    modalContentEl.textContent = "Please enter a valid city to continue."
+                }else {
+                    fullHeightDiv.setAttribute("class","")//removes full height class when results are displayed
+                    viewMapBtn.setAttribute("class","button mapbtn") //makes the 'See on Map' button appear
+            
+                    for (i=0; i < data.length; i++) {
+            
+                        //only displays breweries that match the state selected by user and are not in planning
+                        if(state == data[i].state && data[i].brewery_type !== "planning") {
+                            console.log("Match" + i)
+                            var firstDiv = document.createElement('div');
+                            firstDiv.setAttribute("class", "card");
+                            
+                
+                            var secondDiv = document.createElement('div');
+                            secondDiv.setAttribute("class","card-content")
+                            firstDiv.appendChild(secondDiv);
+                
+                            var brewPageLink = document.createElement('a');
+                            brewPageLink.setAttribute("class", "brewery-page");
+                            brewPageLink.setAttribute("href", "./brewery-page.html?breweryid=" + data[i].id);
+                            secondDiv.appendChild(brewPageLink);
+                
+                            var headerDiv = document.createElement("div");
+                            headerDiv.setAttribute("class","card-header");
+                            brewPageLink.appendChild(headerDiv);
+                
+                            var brandImg = document.createElement("img");
+                            brandImg.setAttribute("id","hop-brand");
+                            brandImg.setAttribute("src","../Images/hop-3.png");
+                            headerDiv.appendChild(brandImg);
+                
+                            var brewName = document.createElement("p");
+                            brewName.setAttribute("class","title is-4 name");
+                            brewName.textContent = data[i].name;
+                            headerDiv.appendChild(brewName);
+                
+                            var infoDiv = document.createElement("div");
+                            infoDiv.setAttribute("class","content");
+                            secondDiv.appendChild(infoDiv);
+                
+                            var ulEl = document.createElement("ul");
+                            infoDiv.appendChild(ulEl);
+            
+                
+                            var brewUrl = data[i].website_url;
+                
+                            //if the value for the url is null, don't generate line for it in html
+                            if(brewUrl === null) {
+                                console.log(data[i].website_url);
+                            } else {
+                                var liUrl1 = document.createElement("li");
+                                var imgIcon = document.createElement("img");
+                                imgIcon.setAttribute("class","icon");
+                                imgIcon.setAttribute("src","../Images/beer-icon.png");
+                                liUrl1.appendChild(imgIcon);
+                                var urlLink = document.createElement("a");
+                                urlLink.setAttribute("href",data[i].website_url);
+                                urlLink.setAttribute("target","blank");
+                                urlLink.textContent = data[i].website_url;
+                                liUrl1.appendChild(urlLink);
+                                ulEl.appendChild(liUrl1);
+                            }
+                
+                
+                            var liUrl2 = document.createElement("li");
+                            var imgIcon2 = document.createElement("img");
+                            imgIcon2.setAttribute("class","icon");
+                            imgIcon2.setAttribute("src","../Images/beer-icon.png");
+                            liUrl2.appendChild(imgIcon2);
+                            var brewType = data[i].brewery_type;
+                            brewType = brewType.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+                            var brewTypeEl = document.createTextNode("Brewery Type: " + brewType);
+                            liUrl2.appendChild(brewTypeEl);
+                            ulEl.appendChild(liUrl2);
+                            
+                            
+                            brewPhone = data[i].phone;
+            
+            
+                            if(brewPhone === null) {
+                                console.log(data[i].website_url);
+                            } else {
+                            //for all phone numbers, puts them in the same format and addes dashes
+                            var arrayBP = brewPhone.split("-");
+                            var joinBP = arrayBP.join("");
+                            var brewPhoneDash = joinBP.slice(0,3) + "-" + joinBP.slice(3,6) + "-" + joinBP.slice(6);
+                            console.log(brewPhoneDash)
+            
+                            var liUrl3 = document.createElement("li");
+                            var imgIcon3 = document.createElement("img");
+                            imgIcon3.setAttribute("class","icon");
+                            imgIcon3.setAttribute("src","../Images/beer-icon.png");
+                            liUrl3.appendChild(imgIcon3);
+                            var brewPhone = document.createTextNode("Phone number: " + brewPhoneDash)
+                            liUrl3.appendChild(brewPhone);
+                            ulEl.appendChild(liUrl3);
+                            }
+                
+                            brewListEl.appendChild(firstDiv);
+                
+                            if(data[i].latitude === null) {
+                                console.log("Coordinates null");
+                            } else {
+                                currentLat = parseFloat(data[i].latitude);
+                                currentLong = parseFloat(data[i].longitude);
+                                centerCount = centerCount + 1;
+                                var currentCoord = {
+                                    lat: currentLat,
+                                    long: currentLong,
+                                    name: data[i].name
+                                }
+                                centerCoordinates.push(currentCoord);
+                            }
+                            
+                        } else {
+                            console.log("No match")
+                        }
+                    }
+                }
+
+                });
+            
+            } else {
+                modalEl.setAttribute("class","modal is-active");
+                modalContentEl.textContent = "Please enter a valid city to continue."
+                return;
+            }
+        })
+
+    }
+
+    
+})
 
 byPostalUrl = "https://api.openbrewerydb.org/breweries?by_postal=95818"
-byQuery1 = "https://api.openbrewerydb.org/breweries"+query
+// byQuery1 = "https://api.openbrewerydb.org/breweries"+query
 byQuery2 = "https://api.openbrewerydb.org/breweries/search?query=Davis"
 byDistanceTo = "https://api.openbrewerydb.org/breweries?by_distance=38.575764,-121.478851"
 
@@ -46,251 +213,19 @@ function addMarker(coordinates,names) {
    });
 }
 // Base function for adding a map
-function initMap() {
-  myLatLng = { lat: 38.5603, lng: -121.4970 };
-  map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 8,
-    center: myLatLng,
-  });
-
-  
-  new google.maps.Marker({
-    position: myLatLng,
-    map,
-    title: "Sacramento!",
-    // icon: "file:///Users/fsandoval/Desktop/761767-1.png",
-  });
-
-}
-
-
 // function initMap() {
-// map = new google.maps.Map(document.getElementById("map"), {
-//     zoom: 10,
-//     //   Where your map will inherently start at.
-//     // City Center
-//     center: { lat: 38.575, lng: -121.494 },
-// });
-// // Example coords. of old soul
-// oldsoulLat = 38.5781
-// oldsoulLong = -121.4780
-// new google.maps.LatLng(33.91851096391805, -121.2344058214569)
-// // marker = new google.maps.Marker({
-// //     map,
-// //     draggable: true,
-// //     animation: google.maps.Animation.DROP,
-// //     position: { lat: 59.327, lng: 18.067 },
-// //   });
-// //   marker.addListener("click", toggleBounce);
-// // }
-
-// // Adds lines to map and change it to a dark green color
-// poly = new google.maps.Polyline({
-//     strokeColor: "#4a7c59",
-//     strokeOpacity: 1.0,
-//     strokeWeight: 3,
+//   myLatLng = { lat: 38.5603, lng: -121.4970 };
+//   map = new google.maps.Map(document.getElementById("map"), {
+//     zoom: 8,
+//     center: myLatLng,
 //   });
-//   poly.setMap(map);
-//   // Add a listener for the click event
-//   map.addListener("click", addLatLng);
 
-//   // Handles click events on a map, and adds a new point to the Polyline.
-//   function addLatLng(event) {
-//       const path = poly.getPath();
-//       // Because path is an MVCArray, we can simply append a new coordinate
-//       // and it will automatically appear.
-//       path.push(event.latLng);
-//       // Add a new marker at the new plotted point on the polyline.
-//       new google.maps.Marker({
-//         position: event.latLng,
-//         title: "#" + path.getLength(),
-//         map: map,
-//       });
-//   }
-// }
-
-// function toggleBounce() {
-//     if (marker.getAnimation() !== null) {
-//       marker.setAnimation(null);
-//     } else {
-//       marker.setAnimation(google.maps.Animation.BOUNCE);
-//     }
-//   }
-
-// // // Pulls the earthquake epicenters and sets them to the heatmap on map interface
-// // // Create a <script> tag and set the USGS URL as the source.
-// // const script = document.createElement("script");
-// // // This example uses a local copy of the GeoJSON stored at
-// // // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
-// // script.src =
-// //     "https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js";
-// // document.getElementsByTagName("head")[0].appendChild(script);
-
-// // function eqfeed_callback(results) {
-// // const heatmapData = [];
-
-// // for (let i = 0; i < results.features.length; i++) {
-// //     const coords = results.features[i].geometry.coordinates;
-// //     const latLng = new google.maps.LatLng(coords[1], coords[0]);
-// //     heatmapData.push(latLng);
-// // }
-// // const heatmap = new google.maps.visualization.HeatmapLayer({
-// //     data: heatmapData,
-// //     dissipating: true,
-// //     map: map,
-// // });
-// // }
-
-// Example coords. of old soul
-oldsoulLat = 38.5781
-oldsoulLong = -121.4780
-
-// beer_api = "https://api.openbrewerydb.org/breweries"
-// // "https://api.openbrewerydb.org/breweries?by_distance=38.8977,77.0365"
-// for (let i = 0; i < brew.length; i++) {
-//   const element = array[i];
   
-// }
-
-// async function fetchData() {
-//   confirm("Running")
-
-
-
-
-
-  // let response = await fetch(byPostalUrl)
-  // .then(response => response.json())
-  // .then(function(data){
-  //   brewObj = data
-
-  //   var myBreweries = [brewObj[0],brewObj[1]];
-  //   console.log("Hardcoded breweries as an array: "+ myBreweries);
-
-
-  //   for (let index = 0; index < brewObj.length; index++) {
-  //   console.log("for loop brew object w index is: "+brewObj[0])
-  //   var myCity = { lat: 38.5816, lng: -121.4944};
-  //   var currentBrewery = brewObj[index];
-  //   var latitude = currentBrewery.latitude
-  //   var longitude = currentBrewery.longitude
-  //   var breweryName = currentBrewery.name 
-
-  //   console.log("current lat is : "+latitude);
-  //   console.log("current long is : "+longitude);
-  //   map.markers.push
-
-  //   markerObj = {
-  //     position : myBreweries[index],
-
-  //   }
-
-
-  //   // myBreweries[index] = {lat: parseFloat(latitude) , lng: parseFloat(longitude)};
-  //   // localStorage.setItem(brewName,)
-    
-  //   // console.log(latitude)
-  //   // console.log(longitude)
-
-  //   // initMap(latitude,longitude,brewName);
-
-  //   // function initMap(lat,long,brewName) {
-      
-  //     // console.log("++Initializing Map++");
-  //     // console.log("breweries lat init: "+ lat);
-  //     // console.log("breweries long init: "+ long);
-  //     // console.log("breweries name init: "+ brewName);
-      
-  //   // }
-
-//     };
-
-//     function initMap() {
-//       const myLatLng = { lat: -25.363, lng: 131.044 };
-//       const map = new google.maps.Map(document.getElementById("map"), {
-//         zoom: 4,
-//         center: myLatLng,
-//       });
-//       new google.maps.Marker({
-//         position: myLatLng,
-//         map,
-//         title: "Hello World!",
-//       });
-//     };
-
-//     console.log(myBreweries)
-
-
-//     function mapmaker() {
-//       for (let index = 0; index < myBreweries.length; index++) {
-
-
-//         console.log(myBreweries[index])
-
-//         const map = new google.maps.Map(document.getElementById("map"), {
-//           zoom: 10,
-//           center: myCity,
-//         });
-
-//         new google.maps.Marker({
-//           position: myBreweries[index],
-//           map,
-//           title: breweryName,}
-//         );
-
-//         new google.maps.Marker({
-//           position: myCity,
-//           map,
-//           title: "Dis My City",
-//           });
-        
-//       }
-//     }
-
-//     mapmaker();
-
-
-//   });
-
-//   // let response = await fetch(byPostalUrl);
-//   // let data = await response.json();
-//   // data = JSON.stringify(data);
-//   // data = JSON.parse(data);
-//   // console.log(data)
-//   // return data;
-// }
-
-
-
-// function initMap(lat,long,brewName) {
-  
-//   console.log("++Initializing Map++");
-//   console.log("breweries lat init: "+ lat);
-//   console.log("breweries long init: "+ long);
-//   console.log("breweries name init: "+ brewName);
-
-//   myCity = { lat: 38.5816, lng: -121.4944};
-//   myBreweries = {lat: parseFloat(lat) , lng: parseFloat(long) };
-//   console.log(myBreweries)
-//   breweryName = brewName
-
-//   const map = new google.maps.Map(document.getElementById("map"), {
-//     zoom: 10,
-//     center: myCity,
-//   });
-
-//   var something = new google.maps.Marker({
-//     position: myBreweries,
-//     map,
-//     title: breweryName,}
-//   );
-
-//   something
-
 //   new google.maps.Marker({
-//     position: myCity,
+//     position: myLatLng,
 //     map,
-//     title: "Dis My City",
-//     });
-  
+//     title: "Sacramento!",
+//     // icon: "file:///Users/fsandoval/Desktop/761767-1.png",
+//   });
+
 // }

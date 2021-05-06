@@ -65,13 +65,24 @@
               Input your specifications below:
             </h3>
             <!-- Bulma form inputs: https://bulma.io/documentation/form/input/ -->
-            
+            <section>
+              <div class="modal">
+              <div class="modal-background"></div>
+              <div class="modal-content">
+                <div class="card modal-card">
+                  <div class="card-content">
+                    <h2 class="modal-text"></h2>
+                  </div>
+                </div>
+              </div>
+              <button class="modal-close is-large" aria-label="close"></button>
+            </section>
+
             <!-- Coordination Input form for the location of the map -->
             <div id="coordform">
-              <input type="text" placeholder="Type something..." id="myInput">
-              <button type="button" onclick="getInputValue();">Gimme some beers.</button>
+              <input id="myquery" type="text" placeholder="Give us a city...">
+              <button id="citybtn" class="button" type="button">Cheers!</button>
             </div>
-
 
           </section>
 
@@ -83,7 +94,7 @@
             </h3>
 
             <!-- Insert map here -->
-            <div id="map"></div>
+            <div class="hidden" id="map"></div>
 
           </section>
           

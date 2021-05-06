@@ -25,6 +25,16 @@ main {
     height: 100%;
 }
 
+.modal-card {
+    background-color: var(--blue);
+}
+
+.modal-text {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--off-white)
+}
+
 #search-bar {
     padding-bottom: 1rem;
 }

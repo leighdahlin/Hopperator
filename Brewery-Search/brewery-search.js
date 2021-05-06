@@ -216,19 +216,13 @@ viewMapBtn.addEventListener("click", function(){
 
 function createCenter() {
 
-    console.log(centerCoordinates);
-
-for(var i=0; i<centerCoordinates.length; i++) {
-
-    // console.log(centerCoordinates[i].long);
+    for(var i=0; i<centerCoordinates.length; i++)  {
     
     latitudesSum = latitudesSum + centerCoordinates[i].lat;
-    // console.log(latitudesSum)
     longitudesSum = longitudesSum + centerCoordinates[i].long;
-    // console.log(longitudesSum)
-}
+    }
 
-return latitudesSum,longitudesSum;
+    return latitudesSum,longitudesSum;
 }
 
 function initMap(bLat,bLong) {
@@ -238,17 +232,10 @@ function initMap(bLat,bLong) {
       zoom: 12,
       center: myLatLng,
     });
-  
-    // new google.maps.Marker({
-    //   position: myLatLng,
-    //   map,
-    //   title: "Sacramento!",
-    // });
-    
+      
 }
 
   
-
 function addMarker(coordinates,names) {
     console.log("Function running")
     var marker = new google.maps.Marker({
@@ -260,11 +247,6 @@ function addMarker(coordinates,names) {
  };
 
  
-
-// function activateModal() {
-//     modalEl.setAttribute("class","modal is-active")
-// }
-
 modalClose.addEventListener("click",function(){
     modalEl.setAttribute("class","modal")
 })

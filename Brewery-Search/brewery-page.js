@@ -136,7 +136,6 @@ function initMap(brewlat,brewlong,name) {
 }
 
 breweryFavBtn.addEventListener("click", function(){
-   
    checkFavorites();
    if (checkFavorites()) {
       console.log("Already favorite") //if already in local storage, does nothing
@@ -144,6 +143,11 @@ breweryFavBtn.addEventListener("click", function(){
       console.log("Not favorited yet") //if  not in local storage, adds to local storage
       breweryFavorites.push(breweryId);
       localStorage.setItem("favBreweries", JSON.stringify(breweryFavorites));
+      breweryFavBtn.textContent = "Favorite";
+      var hearticon = document.createElement("img");
+      hearticon.setAttribute("id","heart-icon");
+      hearticon.setAttribute("src","../Images/heart-icon.png")
+      breweryFavBtn.appendChild(hearticon);
    }
 
 })
@@ -152,6 +156,7 @@ breweryFavBtn.addEventListener("click", function(){
 function checkFavorites() {
    for (i=0; i<breweryFavorites.length; i++) {
       if(breweryId === breweryFavorites[i]) {
+         console.log("running")
          breweryFavBtn.textContent = "Favorite";
          var hearticon = document.createElement("img");
          hearticon.setAttribute("id","heart-icon");

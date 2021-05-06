@@ -30,6 +30,11 @@ main{
     margin-right: 8%;
 }
 
+#heart-icon {
+    height: inherit;
+    padding: 4%;
+}
+
 .container{
     height: 50%;
     display: flex;

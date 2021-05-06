@@ -139,7 +139,6 @@ usrinputBtn.addEventListener("click",function(){
                             var arrayBP = brewPhone.split("-");
                             var joinBP = arrayBP.join("");
                             var brewPhoneDash = joinBP.slice(0,3) + "-" + joinBP.slice(3,6) + "-" + joinBP.slice(6);
-                            console.log(brewPhoneDash)
             
                             var liUrl3 = document.createElement("li");
                             var imgIcon3 = document.createElement("img");

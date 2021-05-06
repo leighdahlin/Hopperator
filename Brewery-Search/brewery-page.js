@@ -152,7 +152,11 @@ breweryFavBtn.addEventListener("click", function(){
 function checkFavorites() {
    for (i=0; i<breweryFavorites.length; i++) {
       if(breweryId === breweryFavorites[i]) {
-         breweryFavBtn.textContent = "Favorite"
+         breweryFavBtn.textContent = "Favorite";
+         var hearticon = document.createElement("img");
+         hearticon.setAttribute("id","heart-icon");
+         hearticon.setAttribute("src","../Images/heart-icon.png")
+         breweryFavBtn.appendChild(hearticon);
          var isFavorite = true
       } else {
          console.log("Id not in local storage")

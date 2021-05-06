@@ -68,12 +68,8 @@
             
             <!-- Coordination Input form for the location of the map -->
             <div id="coordform">
-              <form>
-                  <input id="lat" type="number" placeholder="Lat">
-                  <input id="long" type="number" placeholder="Long">
-                  <input type="search" placeholder="Lat,Long">
-                  <input id="submitLatLong" type="button" value="Gimme beer from here!">
-              </form>
+              <input type="text" placeholder="Type something..." id="myInput">
+              <button type="button" onclick="getInputValue();">Gimme some beers.</button>
             </div>
 
 
@@ -82,7 +78,7 @@
           <section class="section map">
             <h2 class="title">Beer Map</h2>
             <h3 class="subtitle">
-              Input the lat / long for the beer locations you would like to search near
+              Query the beer locations you would like to search near!
                 <!-- Insert subtitle or delete h3 element if not needed -->
             </h3>
 

@@ -1,64 +1,68 @@
-byPostalUrl = "https://api.openbrewerydb.org/breweries?by_postal=95451"
+query = []
+function getInputValue(){
+  // Selecting the input element and get its value 
+  var query = document.getElementById("myInput").value;
+  return query;
+};
+query = "/search?query="+query; 
+
+byPostalUrl = "https://api.openbrewerydb.org/breweries?by_postal=95818"
+byQuery1 = "https://api.openbrewerydb.org/breweries"+query
+byQuery2 = "https://api.openbrewerydb.org/breweries/search?query=Davis"
+byDistanceTo = "https://api.openbrewerydb.org/breweries?by_distance=38.575764,-121.478851"
+
 var breweryName = []
 var breweryLat = []
 var breweryLong = []
 var marker = []
 
-fetch(byPostalUrl)
+fetch(byQuery2)
 .then(function(response){
 return response.json();
 })
 .then(function(data){
-
 var breweryArray = data
 console.log(breweryArray)
 
-
+//Go through breweryArray and add marker
 for (let i = 0; i < breweryArray.length; i++) {
-  addMarker({lat: parseFloat(breweryArray[i].latitude), lng:parseFloat(breweryArray[i].longitude)},breweryArray[i].name)
+  addMarker({
+    lat: parseFloat(breweryArray[i].latitude),
+    lng:parseFloat(breweryArray[i].longitude)},
+    breweryArray[i].name)
 }
 
 })
 
+
+// Base function for adding a marker
 function addMarker(coordinates,names) {
    var marker = new google.maps.Marker({
       position: coordinates, // Passing the coordinates
       map:map, //Map that we need to add
       title: names ,
+      icon: "../Images/beer-icon-small.png",
+      draggable: true,
    });
 }
-
-
+// Base function for adding a map
 function initMap() {
   myLatLng = { lat: 38.5603, lng: -121.4970 };
   map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 12,
+    zoom: 8,
     center: myLatLng,
   });
 
+  
   new google.maps.Marker({
     position: myLatLng,
     map,
     title: "Sacramento!",
-  });  
+    // icon: "file:///Users/fsandoval/Desktop/761767-1.png",
+  });
+
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// fetch
-
-// let map;
 
 // function initMap() {
 // map = new google.maps.Map(document.getElementById("map"), {

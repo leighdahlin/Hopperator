@@ -1,11 +1,13 @@
-var breweryNameEl = document.querySelector("#brew-name")
+var breweryNameEl = document.querySelector("#brew-name");
+var brewImageEl = document.querySelector(".brew-img");
 var breweryInfoEl = document.querySelector(".info");
-var breweryFavBtn = document.querySelector("#favorite")
-var mapEl = document.querySelector("#map")
+var breweryFavBtn = document.querySelector("#favorite");
+var mapEl = document.querySelector("#map");
+var imagesArray = ["../Images/beer-barrels.jpg","../Images/beer-beer-beer.jpg", "../Images/beer-glass.jpg", "../Images/beer-ontap.jpg","../Images/beer-pour.jpg", "../Images/beer-signs-lightup.jpg", "../Images/beer-taps.jpg", "../Images/cans-beer.jpg", "../Images/friends-beer.jpg", "../Images/more-beer-taps.jpg", "../Images/pour-beer.jpg"]
 var breweryId
 var breweryLatitude
 var breweyLongitude
-var breweryFavorites = JSON.parse(localStorage.getItem("favBreweries")) || []
+var breweryFavorites = JSON.parse(localStorage.getItem("favBreweries")) || [];
 
 
 function getId() {
@@ -14,6 +16,13 @@ function getId() {
    breweryId = Id;
    getInfo();
   };
+
+function displayRandomImage(){
+   var randomImage = imagesArray[Math.floor(Math.random()*imagesArray.length)];
+   brewImageEl.setAttribute("src",randomImage);
+   console.log(randomImage)
+
+}
 
 function getInfo() {
    var url = "https://api.openbrewerydb.org/breweries/" + breweryId;
@@ -148,3 +157,4 @@ function checkFavorites() {
 
  getId();
  checkFavorites();
+ displayRandomImage();

@@ -51,14 +51,22 @@ function getInfo() {
       liUrl2.appendChild(brewTypeEl);
       ulEl.appendChild(liUrl2);
 
+      brewPhone = data.phone;      
+      if(brewPhone === null) {
+      } else {
+      //for all phone numbers, puts them in the same format and addes dashes
+      var arrayBP = brewPhone.split("-");
+      var joinBP = arrayBP.join("");
+      var brewPhoneDash = joinBP.slice(0,3) + "-" + joinBP.slice(3,6) + "-" + joinBP.slice(6);
       var liUrl3 = document.createElement("li");
       var imgIcon3 = document.createElement("img");
       imgIcon3.setAttribute("class","icon");
       imgIcon3.setAttribute("src","../Images/beer-icon.png");
       liUrl3.appendChild(imgIcon3);
-      var brewPhone = document.createTextNode("Phone number: " + data.phone)
+      var brewPhone = document.createTextNode("Phone number: " + brewPhoneDash)
       liUrl3.appendChild(brewPhone);
       ulEl.appendChild(liUrl3);
+      }
 
       var liUrl3 = document.createElement("li");
       var imgIcon3 = document.createElement("img");

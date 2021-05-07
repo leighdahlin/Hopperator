@@ -70,6 +70,8 @@ h2 {
 
 .origin-of-beer {
     background-color:white;
+    margin: 0px auto 2.5em auto;
+    width: 80%;
     padding: 2%;
     border-radius: 10px; 
     box-shadow: 0px 0px 10px 0px;
@@ -82,7 +84,14 @@ h2 {
 
 .evolution-of-beer {
     background-color:white;
+    margin: 0px auto 2.5em auto;
+    width: 80%;
     padding: 2%;
     border-radius: 10px; 
     box-shadow: 0px 0px 10px 0px;
+}
+
+#medieval-beer {
+    display: block;
+    margin: 2em auto;
 }

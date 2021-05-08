@@ -13,8 +13,11 @@ The Hoppeator is your one-stop shop to explore the world of beer. Our homepage f
 
 ## Link to Deploy
 
-[The Hopperator: Your Place for All Things Beer]()
+[The Hopperator: Your Place for All Things Beer](https://fransandoval093.github.io/Hopperator/)
 
 ## Screenshots
 
-![Insert Hopperator Screenshots]()
+![Brewery Search](./Images/brew-search-screenshot.jpg)
+![Brewery Information](./Images/screenshot-brewery-information.png)
+![Learn About Beer](./Images/screenshot-learn-about-beer.png)
+![Beer Map](./Images/beer-map-screenshot.jpg)

@@ -15,3 +15,14 @@
     width: 100%;
     /* The width is the width of the web page */
   }
+  
+.map-visible {
+height: 35%;
+/* The height is 400 pixels */
+width: 80%;
+/* The width is the width of the web page */
+}
+
+.hidden {
+    display: none;
+}

@@ -181,6 +181,7 @@ function checkFavorites() {
    return isFavorite; //tells the function for the event listener that the brewery is a favorite
 }
 
+//runs all initial function to generate page content
 function init() {
    getId();
    checkFavorites();

@@ -17,4 +17,7 @@ The Hoppeator is your one-stop shop to explore the world of beer. Our homepage f
 
 ## Screenshots
 
-![Insert Hopperator Screenshots](./Images/brew-search-screenshot.jpg)
+![Brewery Search](./Images/brew-search-screenshot.jpg)
+![Brewery Information](./Images/screenshot-brewery-information.png)
+![Learn About Beer](./Images/screenshot-learn-about-beer.png)
+![Beer Map](./Images/beer-map-screenshot.jpg)

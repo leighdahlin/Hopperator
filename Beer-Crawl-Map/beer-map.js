@@ -1,13 +1,13 @@
 var usrQuery = document.querySelector("#myquery")
 var usrinputBtn = document.querySelector("#citybtn")
-var beer_api = "https://api.openbrewerydb.org/breweries/search?query="
+var beer_api = "https://api.openbrewerydb.org/breweries?by_city="
 let newUrl 
 
 Markers = []
 var marker = []
 var contentString = []
 // uluru = { lat: -25.363, lng: 131.044 };
-sac = {lat: 38.1328, lng: -121.2722}
+sac = {lat: 38.5816, lng: -121.4944}
 
 
 var breweryName = []
@@ -107,16 +107,6 @@ usrinputBtn.addEventListener("click",function(){
         }
 
 
-
-
-
-
-
-
-
-
-
-
     // End of fetch function
     })
 
@@ -130,7 +120,7 @@ usrinputBtn.addEventListener("click",function(){
 
 function initMap() {//This serves to call the function into existence
     map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 4,
+        zoom: 10,
         center: sac,
     });
 }

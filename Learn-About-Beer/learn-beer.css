@@ -10,14 +10,38 @@
 }
 
 .card {
-    width: 60%;
+    width: 75%;
     box-shadow: 0px 8px 10px 0px #4a7c59;
     border-radius: 10px;
-    
+    padding: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
+
 
 a {
     text-decoration: none;
     color: black;
 
+}
+
+.title {
+    justify-content: center;
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    top: 6px;
+    height: 10px;
+}
+
+.column {
+    padding: 10px;
+    margin-top: 20px;
+
+}
+
+.column:hover {
+    font-size: larger;
+    color: #8fc0a9;
 }

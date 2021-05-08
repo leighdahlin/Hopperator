@@ -11,11 +11,11 @@ var mapEl = document.querySelector('#map')
 var brewListEl = document.querySelector(".breweries-list")
 var centerLat = 38.5816; //using center of Sacrametno to initialize map
 var centerLong = -121.4944; //using center of Sacrametno to initialize map
-var centerCount = 0;
-var centerCoordinates = []
-var latitudesSum = 0;
-var longitudesSum = 0;
+var centerCoordinates = [] //empty array to store the lats and longs for each brewery to determine the center to initalize the google map
+var latitudesSum = 0; //initialize varible to sum all the lats
+var longitudesSum = 0; //initialize varible to sum all the longs
 
+//Open Brewery DB API link
 beer_api = "https://api.openbrewerydb.org/breweries"
 
 usrinputBtn.addEventListener("click",function(){
@@ -36,6 +36,7 @@ usrinputBtn.addEventListener("click",function(){
     lowState = state.toLowerCase(); //makes the input lowercase to be input into API
     var newUrl = beer_api + "?by_city=" + city + "&?by_state=" + lowState + "&per_page=50"
     
+    //if the user doesn't select a city or state, a modal will display, else it runs the fetch function
     if (usrCityInput.value == "" || usrStateInput.selectedIndex == 0) {
         modalEl.setAttribute("class","modal is-active");
         modalContentEl.textContent = "Please enter a city and state to continue."
@@ -44,15 +45,15 @@ usrinputBtn.addEventListener("click",function(){
 
         fetch(newUrl)
         .then(function (response) {
-            console.log(newUrl)
             if(response.ok) {
                 return response.json().then(function (data) {
                 usrCityInput.value = ""; //clears the city field
                 usrStateInput.selectedIndex = 0; //clears the state field
 
+                //if the API doesn't pull any data, modal pops up asking for a valid city
                 if(data.length == 0){
                     modalEl.setAttribute("class","modal is-active");
-                    modalContentEl.textContent = "Please enter a valid city to continue."
+                    modalContentEl.textContent = "No brewery data. Please enter a valid city to continue."
                 }else {
                     fullHeightDiv.setAttribute("class","")//removes full height class when results are displayed
                     viewMapBtn.setAttribute("class","button mapbtn") //makes the 'See on Map' button appear
@@ -65,11 +66,12 @@ usrinputBtn.addEventListener("click",function(){
                             var firstDiv = document.createElement('div');
                             firstDiv.setAttribute("class", "card");
                             
-                
+                            //The code below creates the bulma structure of a card for each dataset extracted from the API
                             var secondDiv = document.createElement('div');
                             secondDiv.setAttribute("class","card-content")
                             firstDiv.appendChild(secondDiv);
-                
+                            
+                            //makes the header an anchor that links to a page with  more information on the brewery
                             var brewPageLink = document.createElement('a');
                             brewPageLink.setAttribute("class", "brewery-page");
                             brewPageLink.setAttribute("href", "./brewery-page.html?breweryid=" + data[i].id);
@@ -78,7 +80,8 @@ usrinputBtn.addEventListener("click",function(){
                             var headerDiv = document.createElement("div");
                             headerDiv.setAttribute("class","card-header");
                             brewPageLink.appendChild(headerDiv);
-                
+                            
+                            //the img element before each item serves as a bullet point
                             var brandImg = document.createElement("img");
                             brandImg.setAttribute("id","hop-brand");
                             brandImg.setAttribute("src","../Images/hop-3.png");
@@ -123,7 +126,7 @@ usrinputBtn.addEventListener("click",function(){
                             imgIcon2.setAttribute("src","../Images/beer-icon.png");
                             liUrl2.appendChild(imgIcon2);
                             var brewType = data[i].brewery_type;
-                            brewType = brewType.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+                            brewType = brewType.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase()); //capitalizes the first letter
                             var brewTypeEl = document.createTextNode("Brewery Type: " + brewType);
                             liUrl2.appendChild(brewTypeEl);
                             ulEl.appendChild(liUrl2);
@@ -131,7 +134,7 @@ usrinputBtn.addEventListener("click",function(){
                             
                             brewPhone = data[i].phone;
             
-            
+                            //only displays the breweries phone number if it's not null
                             if(brewPhone === null) {
                                 console.log(data[i].website_url);
                             } else {
@@ -151,18 +154,22 @@ usrinputBtn.addEventListener("click",function(){
                             }
                 
                             brewListEl.appendChild(firstDiv);
-                
+                            
+                            //only collects the lats and longs for each breweries if they're not null
                             if(data[i].latitude === null) {
                                 console.log("Coordinates null");
                             } else {
                                 currentLat = parseFloat(data[i].latitude);
                                 currentLong = parseFloat(data[i].longitude);
-                                centerCount = centerCount + 1;
+
+                                //stores the lats, longs and brewery name into an array that was created globally
                                 var currentCoord = {
                                     lat: currentLat,
                                     long: currentLong,
                                     name: data[i].name
                                 }
+
+                                //pushing currentCoord object into the array
                                 centerCoordinates.push(currentCoord);
                             }
                             
@@ -174,7 +181,7 @@ usrinputBtn.addEventListener("click",function(){
 
                 });
             
-            } else {
+            } else { //if the response status isn't ok, modal will pop up
                 modalEl.setAttribute("class","modal is-active");
                 modalContentEl.textContent = "Please enter a valid city to continue."
                 return;
@@ -187,22 +194,25 @@ usrinputBtn.addEventListener("click",function(){
 })
 
 
-
+//event listener for the 'See on Map' button that appears when a search is run
 viewMapBtn.addEventListener("click", function(){
+    //hides the map once clicked
     viewMapBtn.setAttribute("class","hidden")
 
+    //divides the sum of all lat/longs collected for a city and divides them by the length of the array to get the center
     var divider = centerCoordinates.length;
     createCenter();
     centerLat = parseFloat(latitudesSum/divider);
     centerLong = parseFloat(longitudesSum/divider);
-    console.log(centerLat);
-    console.log(centerLong);
 
+    //makes the map visible and sets the style for view height
     mapEl.setAttribute("class","map-visible");
     mapEl.setAttribute("style","height:35vh;");
 
+    //runs the google API's initMap function for the center calculated above
     initMap(centerLat,centerLong);
 
+    //for each lat/long in the centerCoodinates array, creates a marker with the title of the brewery
     for(var i=0; i<centerCoordinates.length; i++) {
         var brewLat = parseFloat(centerCoordinates[i].lat);
         var brewLon = parseFloat(centerCoordinates[i].long)
@@ -214,23 +224,19 @@ viewMapBtn.addEventListener("click", function(){
 
 })
 
+//function to sum all the lats and longs collected in the centerCoodinates array
 function createCenter() {
 
-    console.log(centerCoordinates);
-
-for(var i=0; i<centerCoordinates.length; i++) {
-
-    // console.log(centerCoordinates[i].long);
-    
+    for(var i=0; i<centerCoordinates.length; i++)  {
     latitudesSum = latitudesSum + centerCoordinates[i].lat;
-    // console.log(latitudesSum)
     longitudesSum = longitudesSum + centerCoordinates[i].long;
-    // console.log(longitudesSum)
+    }
+
+    return latitudesSum,longitudesSum;
 }
 
-return latitudesSum,longitudesSum;
-}
-
+//google maps API function to initialize the google map
+//when the page opens, the function runs but is hidden
 function initMap(bLat,bLong) {
     console.log("running initMap")
     myLatLng = { lat: bLat, lng: bLong };
@@ -238,33 +244,21 @@ function initMap(bLat,bLong) {
       zoom: 12,
       center: myLatLng,
     });
-  
-    // new google.maps.Marker({
-    //   position: myLatLng,
-    //   map,
-    //   title: "Sacramento!",
-    // });
-    
+      
 }
 
-  
-
+//function that adds markers to the google map
 function addMarker(coordinates,names) {
     console.log("Function running")
     var marker = new google.maps.Marker({
-       position: coordinates, // Passing the coordinates
-       map:map, //Map that we need to add
+       position: coordinates, 
+       map:map, 
        title: names,
     });
 
  };
 
- 
-
-// function activateModal() {
-//     modalEl.setAttribute("class","modal is-active")
-// }
-
+//function to close the modal
 modalClose.addEventListener("click",function(){
     modalEl.setAttribute("class","modal")
 })

@@ -1,9 +1,14 @@
-var favoritesSection = document.querySelector(".favorites-list")
+//selects the favorites container
+var favoritesSection = document.querySelector(".favorites-list") 
+
+//retrieves the brewery id from local storage
 var favorites = JSON.parse(localStorage.getItem("favBreweries")) || []
 
 
 
-
+//generates cards for each brewery id saved to local storage
+//this mimics the process used in brewery-search.js, use comments in that file for reference
+//the only difference is pulling information from Open Brewery DB using the id instead of city/state
 for (var i=0; i<favorites.length; i++) {
     breweryId = favorites[i];
     var url = "https://api.openbrewerydb.org/breweries/" + breweryId;

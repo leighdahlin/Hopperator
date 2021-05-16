@@ -13,7 +13,7 @@ The Hoppeator is your one-stop shop to explore the world of beer. Our homepage f
 
 ## Link to Deploy
 
-[The Hopperator: Your Place for All Things Beer](https://fransandoval093.github.io/Hopperator/)
+[The Hopperator: Your Place for All Things Beer](https://leighdahlin.github.io/Hopperator/)
 
 ## Screenshots
 
@@ -21,3 +21,18 @@ The Hoppeator is your one-stop shop to explore the world of beer. Our homepage f
 ![Brewery Information](./Images/screenshot-brewery-information.png)
 ![Learn About Beer](./Images/screenshot-learn-about-beer.png)
 ![Beer Map](./Images/beer-map-screenshot.jpg)
+
+## Credits
+
+Homepage - Gabriel Garcia Ruiz
+Beer Search/Favorites - Leigh Dahlin
+Beer Map - Francisco Sandoval
+Learn About Beer - Matt Rodriguez
+
+##  License & Copyright
+
+(c) Leigh Dahlin, UC Davis Coding Bootcamp
+
+Licensed under the [MIT License](License.md)
+
+

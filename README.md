@@ -6,7 +6,7 @@ The Hoppeator is your one-stop shop to explore the world of beer. Our homepage f
 
 ## Technologies Used
 
-* HTML, CSS and Javascript
+* HTML, CSS and JavaScript
 * Bulma CSS library
 * Open Brewery DB API
 * Google Maps API
